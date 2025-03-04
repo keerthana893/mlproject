@@ -9,6 +9,9 @@ from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 from src.components.data_tranformation import DataTransformation
 from src.components.data_tranformation import DataTransformationConfig
+from src.components.model_trainer import ModelTrainerConfig
+from src.components.model_trainer import ModelTrainer
+
 
 # in this it needs some input..input can be like where we save train data,test data,raw data..these kind of input will be creating in another class..
 @dataclass   # decorator--can be used to define class without using init.
@@ -46,7 +49,10 @@ if __name__=="__main__":
     train_data,test_data=obj.initiate_data_ingestion()     
 
     data_transformation=DataTransformation()
-    data_transformation.initiate_data_transformation(train_data,test_data)
+    train_arr,test_arr,_= data_transformation.initiate_data_transformation(train_data,test_data)
+
+    modeltrainer=ModelTrainer()
+    print(modeltrainer.initiate_model_trainer(train_arr,test_arr))
 
 
 
